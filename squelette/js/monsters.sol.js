@@ -85,6 +85,15 @@ monster.modules.actions = (function(){
 			life = 0;
 			monster.modules.app.log("The monster is died.");
 			monster.modules.app.displayStatus(life, money, "died");
+		},
+
+		newlife: function(){
+			name = "George";
+			life = 70;
+			money = 200;
+			awake = true;
+			monster.modules.app.log("New life for the monster " + name + ".");
+			monster.modules.app.displayStatus(life, money, "awake");
 		}
 
 	}
@@ -104,6 +113,7 @@ monster.modules.app = (function(){
 			var eat = document.getElementById("b5");
 			var show = document.getElementById("b6");
 			var kill = document.getElementById("k");
+			var newlife = document.getElementById("b1");
 
 			monster.modules.actions.init("Fred", 80, 180, true);
 			show.onclick = monster.modules.actions.showme;
@@ -114,6 +124,7 @@ monster.modules.app = (function(){
 			eat.onclick = monster.modules.actions.eat;
 			sleep.onclick = monster.modules.actions.sleep;
 			kill.onclick = monster.modules.actions.kill;
+			newlife.onclick = monster.modules.actions.newlife;
 
 			setInterval(function(){
 				var action = Math.floor(Math.random() * 5 + 1);
