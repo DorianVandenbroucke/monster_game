@@ -59,7 +59,7 @@ monster.modules.actions = (function(){
 		},
 
 		eat: function(){
-			if(money >= 3 && awake === true){
+			if(money >= 3 && awake === true && life > 0){
 				monster.modules.app.log("The monster is eating.");
 				life = life+2;
 				money = money-3;
@@ -68,17 +68,23 @@ monster.modules.actions = (function(){
 		},
 
 		sleep: function(){
+			if(life > 0){
+				monster.modules.app.log("The monster is sleeping.");
+				awake = false;
+				monster.modules.app.displayStatus(life, money, "sleeping");
+				setTimeout(function(){
+					monster.modules.app.log("The monster is awake.");
+					awake = true;
+					life = life+1;
+					monster.modules.app.displayStatus(life, money, "awake");
+				}, 10000);
+			}
+		},
 
-			monster.modules.app.log("The monster is sleeping.");
-			awake = false;
-			monster.modules.app.displayStatus(life, money, "sleeping");
-			setTimeout(function(){
-				monster.modules.app.log("The monster is awake.");
-				awake = true;
-				life = life+1;
-				monster.modules.app.displayStatus(life, money, "awake");
-			}, 10000);
-
+		kill: function(){
+			life = 0;
+			monster.modules.app.log("The monster is died.");
+			monster.modules.app.displayStatus(life, money, "died");
 		}
 
 	}
@@ -97,6 +103,7 @@ monster.modules.app = (function(){
 			var sleep = document.getElementById("b4");
 			var eat = document.getElementById("b5");
 			var show = document.getElementById("b6");
+			var kill = document.getElementById("k");
 
 			monster.modules.actions.init("Fred", 80, 180, true);
 			show.onclick = monster.modules.actions.showme;
@@ -106,6 +113,7 @@ monster.modules.app = (function(){
 			work.onclick = monster.modules.actions.work;
 			eat.onclick = monster.modules.actions.eat;
 			sleep.onclick = monster.modules.actions.sleep;
+			kill.onclick = monster.modules.actions.kill;
 
 			setInterval(function(){
 				var action = Math.floor(Math.random() * 5 + 1);
