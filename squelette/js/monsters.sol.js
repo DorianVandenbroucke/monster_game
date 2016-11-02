@@ -14,12 +14,6 @@ monster.modules.actions = (function(){
 
 		showme: function(){
 
-			if(awake === true){
-				awake = "awake";
-			}else{
-				awake = "sleeping";
-			}
-
 			monster.modules.app.displayStatus(life, money, awake);
 
 			monster.modules.app.log("Le monstre s'appelle "+name+", il a "+life+" de points de vie et "+money+" en argent. Il est actuellement "+awake);
@@ -31,6 +25,7 @@ monster.modules.actions = (function(){
 			life = l;
 			money = m;
 			awake = a;
+			monster.modules.app.displayStatus(life, money, awake);
 		},
 
 		run: function(){
@@ -71,12 +66,12 @@ monster.modules.actions = (function(){
 			if(life > 0){
 				monster.modules.app.log("The monster is sleeping.");
 				awake = false;
-				monster.modules.app.displayStatus(life, money, "sleeping");
+				monster.modules.app.displayStatus(life, money, awake);
 				setTimeout(function(){
 					monster.modules.app.log("The monster is awake.");
 					awake = true;
 					life = life+1;
-					monster.modules.app.displayStatus(life, money, "awake");
+					monster.modules.app.displayStatus(life, money, awake);
 				}, 10000);
 			}
 		},
@@ -93,7 +88,7 @@ monster.modules.actions = (function(){
 			money = 200;
 			awake = true;
 			monster.modules.app.log("New life for the monster " + name + ".");
-			monster.modules.app.displayStatus(life, money, "awake");
+			monster.modules.app.displayStatus(life, money, awake);
 		}
 
 	}
@@ -128,16 +123,17 @@ monster.modules.app = (function(){
 
 			setInterval(function(){
 				var action = Math.floor(Math.random() * 5 + 1);
-				if(action = 1){
-					monster.modules.actions.run;
-				}else if(action = 2){
-					monster.modules.actions.fight;
-				}else if(action = 3){
-					monster.modules.actions.work;
-				}else if(action = 4){
-					monster.modules.actions.eat;
-				}else if(action = 5){
-					monster.modules.actions.sleep;
+				console.log(action);
+				if(action == 1){
+					monster.modules.actions.run();
+				}else if(action == 2){
+					monster.modules.actions.fight();
+				}else if(action == 3){
+					monster.modules.actions.work();
+				}else if(action == 4){
+					monster.modules.actions.eat();
+				}else if(action == 5){
+					monster.modules.actions.sleep();
 				}
 			}, 12000);
 
@@ -157,6 +153,12 @@ monster.modules.app = (function(){
 		}),
 
 		displayStatus: (function(life, money, awake){
+
+			if(awake === true){
+				awake = "awake";
+			}else{
+				awake = "sleeping";
+			}
 
 			var parent = document.getElementById("status");
 
