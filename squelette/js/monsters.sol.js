@@ -156,6 +156,8 @@ monster.modules.app = (function(){
 
 			if(awake === true){
 				awake = "awake";
+			}else if(awake === "died"){
+				awake = "died";
 			}else{
 				awake = "sleeping";
 			}
