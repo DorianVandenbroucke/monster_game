@@ -187,11 +187,11 @@ monster.modules.app = (function(){
 			var li_3_init = document.querySelectorAll("#status li")[2];
 			parent.replaceChild(li_3, li_3_init);
 
-			this.showStatus(life);
+			this.showStatus(life, money);
 
 		}),
 
-		showStatus: (function(life){
+		showStatus: (function(life, money){
 
 			var monster = document.getElementById("monster");
 
@@ -207,7 +207,10 @@ monster.modules.app = (function(){
 				var color = "lightgreen";
 			}
 
+			var border_size = money/10;
+
 			monster.style.backgroundColor = color;
+			monster.style.border = border_size+"px solid yellow";
 
 		})
 
