@@ -154,6 +154,11 @@ monster.modules.app = (function(){
 
 		displayStatus: (function(life, money, awake){
 
+			if(life == 0){
+				awake = "died";
+				this.log("The monster is died.");
+			}
+
 			if(awake === true){
 				awake = "awake";
 			}else if(awake === "died"){
@@ -182,10 +187,28 @@ monster.modules.app = (function(){
 			var li_3_init = document.querySelectorAll("#status li")[2];
 			parent.replaceChild(li_3, li_3_init);
 
+			this.showStatus(life);
+
+		}),
+
+		showStatus: (function(life){
+
+			if(life < 5){
+
+			}else if(life < 10){
+
+			}else if(life < 15){
+
+			}else if(life < 20){
+
+			}else{
+				
+			}
+
 		})
 
 	}
 
 })();
 
-window.onload = monster.modules.app.run();
+window.onload = monster.modules.app.run;
