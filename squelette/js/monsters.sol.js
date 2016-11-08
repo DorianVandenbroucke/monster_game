@@ -123,7 +123,6 @@ monster.modules.app = (function(){
 
 			setInterval(function(){
 				var action = Math.floor(Math.random() * 5 + 1);
-				console.log(action);
 				if(action == 1){
 					monster.modules.actions.run();
 				}else if(action == 2){
