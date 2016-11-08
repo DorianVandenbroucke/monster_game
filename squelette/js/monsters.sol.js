@@ -193,17 +193,21 @@ monster.modules.app = (function(){
 
 		showStatus: (function(life){
 
+			var monster = document.getElementById("monster");
+
 			if(life < 5){
-
+				var color = "red";
 			}else if(life < 10){
-
+				var color = "orange";
 			}else if(life < 15){
-
+				var color = "blue";
 			}else if(life < 20){
-
+				var color = "green";
 			}else{
-				
+				var color = "lightgreen";
 			}
+
+			monster.style.backgroundColor = color;
 
 		})
 
